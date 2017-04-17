@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-car</title>
+    <link rel="stylesheet" href="js/bootstrap.min.css">
+
+</head>
+<body>
+<div class="app">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <caption class="h3 text-danger">购物车</caption>
+
+                　　
+                <tr class="text-center">
+                    <td>商品名称</td>
+                    <td>商品价格</td>
+                    <td>操作</td>
+                </tr>
+
+                <tbody class="text-center">
+                　　　　　　　　　　　　
+                <tr v-for="iphone in iphonAll">
+                    <td>{{iphone.name}}</td>
+                    <td>{{iphone.price}}</td>
+                    <td><button class="btn btn-danger"　@click="removeone(iphone)">删除</button></td>
+                </tr>
+
+                <tr class="text-left" >
+
+                    <td colspan="3" v-if="iphonAll.length">
+                        <button class="btn btn-danger btn-lg" @click="removAll">删除全部</button>
+                    </td>
+                </tr>
+
+                </tbody>
+
+
+            </table>
+        </div>
+
+
+    </div>
+
+    　　　
+    <form role="form">
+
+        <div class="form-group">
+            <label for="productName">商品名称</label>
+            <input type="text" v-model="name" class="form-control" id="productName" placeholder="请输入商品名称">
+        </div>
+
+        <div class="form-group">
+            <label for="productPrice">商品价格</label>
+            <input type="text" v-model="price" class="form-control" id="productPrice" placeholder="请输入商品价格">
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-info" @click="add">添加</button>
+            <button type="reset" class="btn btn-warning">重置</button>
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
+
+<script src="js/vue.min.js"></script>
+
+<script>
+    var vm=new Vue({
+        el:'.app',
+        data:{
+            name:'',
+            price:'',
+            iphonAll:[{name:'iphon5',price:3000},{name:'iphon6',price:5000},{name:'iphone7',price:6000}]
+        },
+        methods:{
+            removeone(product){
+                this.iphonAll=this.iphonAll.filter(item=>{
+                   return item!=product;
+               })
+            },
+            removAll(){
+                this.iphonAll='';
+            },
+            add(){
+                this.iphonAll.push({name:this.name,price:this.price});
+                this.name=this.price=''
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
+
+
+<!--
+
+,
+            removeAll(){
+                this.iphonAll=[];
+            },
+            add(){
+                this.iphonAll.push({name:this.name,price:this.price});
+                this.name=this.price='';
+            }
+-->
